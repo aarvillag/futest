@@ -99,7 +99,9 @@ df_day=pd.read_csv(my_file,dtype={'date': str,'timetable': str,'max' : float ,'m
                                               'range-trail' : float, 'range-avg' : float, 'open': float, 'long-close': float,
                                               'short-close': float, 'close': float, 'long-rst': float, 'short-rst': float,
                                               'long-acc': float, 'short-acc': float},
-                   parse_dates=['date'])  
+                   parse_dates=['date']) 
+
+time.sleep(2)
 
 # Step 0 for generate the short/long process and the result
 
@@ -113,6 +115,8 @@ my_multiplier, my_guarantee, my_delta_time, my_tic = time_guarantee(s_contract, 
 
 tmp=subprocess.run(['./LongShort', s_contract, str(s_year_ini), str(s_year_end), my_file, str(axs_limit), str(s_axs_target), str(my_multiplier), str(my_tic), 'LLEX'],
                   capture_output=False, stdout=None)
+
+time.sleep(2)
 
 if tmp.returncode != 9:
     st.write(f'Error = File not processed({tmp.returncode})')
