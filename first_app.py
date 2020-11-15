@@ -89,7 +89,7 @@ key_config = key_config + str(s_rng_years)+str(s_rng_adjust)
 
 st.text(f'file preprocessed {key_config}')
 
-my_file=f'../Data/{key_config}_03.csv'
+my_file=f'{key_config}_03.csv'
 
 if not validate_file(my_file):
     st.warning('File preprocessed does not exist. Please be sure to process it before to have the information')
@@ -111,14 +111,14 @@ my_multiplier, my_guarantee, my_delta_time, my_tic = time_guarantee(s_contract, 
 #df_result.to_csv(f'../Data/{s_contract}_04.csv', index=False)                                      # XX_04
 
 
-tmp=subprocess.run(['../LongShort', s_contract, str(s_year_ini), str(s_year_end), my_file, str(axs_limit), str(s_axs_target), str(my_multiplier), str(my_tic), 'LLEX'],
+tmp=subprocess.run(['LongShort', s_contract, str(s_year_ini), str(s_year_end), my_file, str(axs_limit), str(s_axs_target), str(my_multiplier), str(my_tic), 'LLEX'],
                   capture_output=False, stdout=None)
 
 if tmp.returncode != 9:
     st.write(f'Error = File not processed({tmp.returncode})')
 
 
-my_file=f'../Data/{s_contract}_04.csv'
+my_file=f'{s_contract}_04.csv'
 df_result=pd.read_csv(my_file,dtype={'date': str,'timetable': str,'max' : float ,'min' : float ,'range' : float ,
                                               'range-trail' : float, 'range-avg' : float, 'open': float, 'long-close': float,
                                               'short-close': float, 'close': float, 'long-rst': float, 'short-rst': float,
@@ -516,7 +516,7 @@ with colC:                                               # plot Maximum Drawdown
 
 if strategies_tab_on:
     
-    my_table='../Data/TableStrategiesReg.csv'
+    my_table='TableStrategiesReg.csv'
 
     if not validate_file(my_file):
         st.warning('File with strategies sumary does not exist.')
